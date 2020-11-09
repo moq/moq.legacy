@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <LangVersion>Preview</LangVersion>
+    <Nullable>enable</Nullable>
+    <TargetFramework>net472</TargetFramework>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>bin</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="ModuleInitializer.cs" />
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="3.8.0-4.final" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0-4.final" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Features" Version="3.8.0-4.final" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="3.8.0-4.final" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.8.0-4.final" />
+
+    <PackageReference Include="Microsoft.Build" Version="16.7.0" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.7.0" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.Build.Locator" Version="1.2.6" />
+
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" PrivateAssets="all" />
+
+    <PackageReference Include="ThisAssembly" Version="1.0.0-alpha" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectProperty Include="MSBuildBinPath" />
+    <ProjectProperty Include="MSBuildProjectDirectory" />
+    <ProjectProperty Include="NuGetRestoreTargets" />
+    <ProjectProperty Include="NuGetTargets" />
+  </ItemGroup>
+
+  <Target Name="ClearMSBuild" AfterTargets="Build">
+    <ItemGroup>
+      <MSBuildAssembly Include="$(OutputPath)\Microsoft.Build*.dll" Exclude="$(OutputPath)\Microsoft.Build.Locator.dll" />
+    </ItemGroup>
+    <Delete Files="@(MSBuildAssembly)">
+      <Output TaskParameter="DeletedFiles" ItemName="DeletedFiles" />
+    </Delete>
+    <Message Text="Deleted: @(DeletedFiles)" Importance="high" />
+  </Target>
+
+</Project>
