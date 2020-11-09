@@ -1,0 +1,45 @@
+﻿name: release
+on:
+  release:
+    types: [created]
+
+env:
+  DOTNET_NOLOGO: true
+  MSBUILDDISABLENODEREUSE: 1
+  Configuration: Release
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: 🤘 checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - name: set version
+        run: echo "::set-env name=VERSION::${GITHUB_REF#refs/*/v}"
+        shell: bash
+      - name: ⚙ dotnet 5.0 rc2
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.100-rc.2.20479.15
+      - name: ⚙ dotnet 2.1.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 2.1.x
+      - name: ⚙ dotnet 3.1.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+      - run: dotnet tool update -g dotnet-vs
+      - run: echo "::set-env name=MSB::$(vs where preview --prop=InstallationPath)"
+      - name: 🔽 vs preview
+        run: vs install preview --quiet +Microsoft.VisualStudio.Component.ManagedDesktop.Core	+Microsoft.NetCore.Component.DevelopmentTools
+        if: env.MSB == ''
+      - run: echo "::add-path::$(vs where preview --prop=InstallationPath)\MSBuild\Current\Bin"
+      - name: 🙏 build
+        run: msbuild -r
+      - name: 📦 legacynator
+        run: bin\legacynator.exe
+      - name: 🚀 push
+        run: dotnet nuget push moq4\out\**\*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate

@@ -1,0 +1,4 @@
+[submodule "moq4"]
+	path = moq4
+	url = https://github.com/moq/moq4
+	branch = kzu/simplify
