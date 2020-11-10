@@ -16,10 +16,10 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - name: ⚙ dotnet 5.0 rc2
+      - name: ⚙ dotnet 5.0
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 5.0.100-rc.2.20479.15
+          dotnet-version: 5.0.x
       - name: ⚙ dotnet 2.1.x
         uses: actions/setup-dotnet@v1
         with:
