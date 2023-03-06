@@ -24,7 +24,7 @@
     <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="3.8.0-4.final" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0-4.final" />
-    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Features" Version="3.8.0-4.final" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Features" Version="4.5.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="3.8.0-4.final" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.8.0-4.final" />
 
