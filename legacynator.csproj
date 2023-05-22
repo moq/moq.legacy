@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -25,7 +25,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="3.8.0-4.final" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0-4.final" />
     <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Features" Version="3.8.0-4.final" />
-    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="3.8.0-4.final" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="4.6.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.8.0-4.final" />
 
     <PackageReference Include="Microsoft.Build" Version="16.7.0" ExcludeAssets="runtime" />
